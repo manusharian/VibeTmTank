@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityStandardAssets.CrossPlatformInput;
 
-public class PlayerControler : MonoBehaviour {
+public class PlayerController : MonoBehaviour {
 
     public float speed = 5;
    
