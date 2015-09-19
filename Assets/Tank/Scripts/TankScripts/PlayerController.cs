@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour {
     public float speed = 5;
    
     private Rigidbody2D myBody;
-
 	// Use this for initialization
 	void Start () {
         myBody = this.GetComponent<Rigidbody2D>();
@@ -19,7 +18,7 @@ public class PlayerController : MonoBehaviour {
         bool isFiring = CrossPlatformInputManager.GetButtonDown("FireButton");
         if (isFiring)
         {
-            myBody.AddForce(new Vector2(20,20) * 2);
+            myBody.AddForce(moveVector * 2);
         }
         else
         {

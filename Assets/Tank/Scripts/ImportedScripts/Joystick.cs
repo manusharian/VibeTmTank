@@ -1,4 +1,5 @@
 using System;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -25,6 +26,10 @@ namespace UnityStandardAssets.CrossPlatformInput
 		CrossPlatformInputManager.VirtualAxis m_HorizontalVirtualAxis; // Reference to the joystick in the cross platform input
 		CrossPlatformInputManager.VirtualAxis m_VerticalVirtualAxis; // Reference to the joystick in the cross platform input
 
+        public GameObject joystick = null;
+        public Sprite sprite;
+        Image image;
+
 		void OnEnable()
 		{
 			CreateVirtualAxes();
@@ -33,6 +38,12 @@ namespace UnityStandardAssets.CrossPlatformInput
         void Start()
         {
             m_StartPos = transform.position;
+
+            image = joystick.GetComponentInChildren<Image>();
+            image.sprite = null;
+            Color c =  image.material.color;
+            c.a = 0;
+            image.material.color = c;
         }
 
 		void UpdateVirtualAxes(Vector3 value)
@@ -97,10 +108,21 @@ namespace UnityStandardAssets.CrossPlatformInput
 		{
 			transform.position = m_StartPos;
 			UpdateVirtualAxes(m_StartPos);
+            image.sprite = null;
+            Color c = image.material.color;
+            c.a = 0;
+            image.material.color = c;
 		}
 
 
-		public void OnPointerDown(PointerEventData data) { }
+		public void OnPointerDown(PointerEventData data) {
+            image.sprite = sprite;
+            Color c = image.material.color;
+            c.a = 0xFF;
+            image.material.color = c;
+
+            m_StartPos = data.position;
+        }
 
 		void OnDisable()
 		{
