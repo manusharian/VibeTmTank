@@ -37,11 +37,11 @@ namespace UnityStandardAssets.CrossPlatformInput
 
         void Start()
         {
-            m_StartPos = transform.position;
+           m_StartPos = transform.position;
 
             image = joystick.GetComponentInChildren<Image>();
             image.sprite = null;
-            Color c =  image.material.color;
+            Color c = image.material.color;
             c.a = 0;
             image.material.color = c;
         }
@@ -84,30 +84,30 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 		public void OnDrag(PointerEventData data)
 		{
-			Vector3 newPos = Vector3.zero;
+            Vector3 newPos = Vector3.zero;
 
-			if (m_UseX)
-			{
-				int delta = (int)(data.position.x - m_StartPos.x);
-				///delta = Mathf.Clamp(delta, - MovementRange, MovementRange);
-				newPos.x = delta;
-			}
+            if (m_UseX)
+            {
+                int delta = (int)(data.position.x - m_StartPos.x);
+                ///delta = Mathf.Clamp(delta, - MovementRange, MovementRange);
+                newPos.x = delta;
+            }
 
-			if (m_UseY)
-			{
-				int delta = (int)(data.position.y - m_StartPos.y);
-				//delta = Mathf.Clamp(delta, -MovementRange, MovementRange);
-				newPos.y = delta;
-			}
-			transform.position = Vector3.ClampMagnitude(new Vector3(newPos.x, newPos.y, newPos.z), MovementRange) + m_StartPos;
-			UpdateVirtualAxes(transform.position);
-		}
+            if (m_UseY)
+            {
+                int delta = (int)(data.position.y - m_StartPos.y);
+                //delta = Mathf.Clamp(delta, -MovementRange, MovementRange);
+                newPos.y = delta;
+            }
+            transform.position = Vector3.ClampMagnitude(new Vector3(newPos.x, newPos.y, newPos.z), MovementRange) + m_StartPos;
+            UpdateVirtualAxes(transform.position);
+        }
 
 
 		public void OnPointerUp(PointerEventData data)
 		{
-			transform.position = m_StartPos;
-			UpdateVirtualAxes(m_StartPos);
+            //transform.position = m_StartPos;
+           // UpdateVirtualAxes(m_StartPos);
             image.sprite = null;
             Color c = image.material.color;
             c.a = 0;
@@ -116,12 +116,14 @@ namespace UnityStandardAssets.CrossPlatformInput
 
 
 		public void OnPointerDown(PointerEventData data) {
+
             image.sprite = sprite;
             Color c = image.material.color;
             c.a = 0xFF;
             image.material.color = c;
 
-            m_StartPos = data.position;
+             // UpdateVirtualAxes(m_StartPos);
+          //  transform.position = data.position;
         }
 
 		void OnDisable()
